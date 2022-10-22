@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" >
+<head>
+    <meta charset="utf-8">
+    <meta http-equive="X-UA-Compatible" content="IE=edge" />
+    <title>Project 4</title>
+
+</head>
+
+<body>
+     <div id="container1">
+         <button id="1">Paper</button>
+         <button id="2">Rock</button>
+         <button id="3">Scissors</button>
+         <button id="new">New Game</button>
+     </div>
+        
+
+    <script>
+
+        const buttons = document.querySelectorAll('button');
+        var playerScore = 0;
+        var compScore = 0;
+        var i = 1;
+
+        const roundText = document.createElement('h3');
+        document.body.appendChild(roundText);    
+
+        const scoreText = document.createElement('h3');
+        document.body.appendChild(scoreText);   
+
+        buttons.forEach((button) => {
+            button.addEventListener('click', () => {
+                switch (button.id) {
+                    case '1':
+                        game('paper');
+                        break;
+                    case '2':
+                        game('rock');
+                        break;
+                    case '3':
+                        game('scissors');
+                        break;
+                    case 'new':
+                        newGame();
+                        break;
+                }
+            });
+        });
+        function newGame() {
+            var playerScore = 0;
+            var compScore = 0;
+            location.reload();
+}
+
+        function computerPlay() {
+            let a;
+            a = Math.floor(Math.random() * 3);
+            if (a == 0) {
+                return "rock";
+            }
+            else if (a == 1) {
+                return "paper";
+            }
+            else {
+                return "scissors";
+            }
+        }
+
+        function playRound(playerSelect, compSelect) {
+            if (playerSelect == "rock" && compSelect == "scissors") {
+                const sciText = document.createElement('p');
+                sciText.textContent = "Rock vs Scissors";
+                sciText.style.color = 'red';
+                document.body.appendChild(sciText);
+                return "Player wins!";
+            }
+
+            if (playerSelect == "rock" && compSelect == "paper") {
+                const paperText = document.createElement('p');
+                paperText.textContent = "Rock vs Paper";
+                document.body.appendChild(paperText); 
+                return "Computer wins!";
+            }
+
+            if (playerSelect == "scissors" && compSelect == "paper") {
+                const paperText = document.createElement('p');
+                paperText.textContent = "Scissors vs Paper";
+                document.body.appendChild(paperText); 
+                return "Player wins!";
+            }
+
+            if (playerSelect == "scissors" && compSelect == "rock") {
+                const rockText = document.createElement('p');
+                rockText.textContent = "Scissors vs Rock";
+                rockText.style.color = 'blue';
+                document.body.appendChild(rockText); 
+                return "Computer wins!";
+            }
+
+            if (playerSelect == "paper" && compSelect == "scissors") {
+                const sciText = document.createElement('p');
+                sciText.textContent = "Paper vs Scissors";
+                sciText.style.color = 'red';
+                document.body.appendChild(sciText);
+                return "Computer wins!";
+            }
+
+            if (playerSelect === compSelect) {
+                const tieText = document.createElement('p');
+                tieText.textContent = "Tie";
+                tieText.style.color = 'green';
+                document.body.appendChild(tieText);
+                return "Tie";
+            }
+
+            if (playerSelect == "paper" && compSelect == "rock") {
+                const rockText = document.createElement('p');
+                rockText.textContent = "Paper vs Rock";
+                rockText.style.color = 'blue';
+                document.body.appendChild(rockText); 
+                return "Player wins!";
+            }
+        }
+
+        function game(a) {
+            var rounds = playRound(a, computerPlay());
+            if (rounds == "Player wins!") {
+                playerScore++;
+                if (playerScore == 5) {
+                    const pWinText = document.createElement('h3');
+                    pWinText.textContent = "Computer wins! All hail our A.I. Overlords! Start new game?";
+                    document.body.appendChild(pWinText); 
+                }
+            } else if (rounds == "Computer wins!") {
+                compScore++;
+                if (compScore == 5) {
+                    const cWinText = document.createElement('h3');
+                    cWinText.textContent = "Computer wins! All hail our A.I. Overlords! Start new game?";
+                    document.body.appendChild(cWinText); 
+                }
+            } 
+            roundText.textContent = `Round ${i}`;
+            scoreText.textContent=`Player: ${playerScore} Computer: ${compScore}`
+            i++;
+        }
+       
+    </script>
+</body>
+
+</html>
