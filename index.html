@@ -5,17 +5,20 @@
     <meta charset="utf-8">
     <meta http-equive="X-UA-Compatible" content="IE=edge" />
     <title>Project 4</title>
+    <link rel="stylesheet" href="./css/styles.css" />
 
 </head>
 
 <body>
-     <div id="container1">
-         <button id="1">Paper</button>
-         <button id="2">Rock</button>
-         <button id="3">Scissors</button>
-         <button id="new">New Game</button>
-     </div>
-        
+    <button class="button" , id="new">New Game</button>
+
+    <h1 id="h1">Choose your fighter!</h1>
+
+    <div>
+        <button class="button" , id="2">Rock</button>
+        <button class="button" , id="1">Paper</button>
+        <button class="button" , id="3">Scissors</button>
+    </div>
 
     <script>
 
@@ -23,23 +26,70 @@
         var playerScore = 0;
         var compScore = 0;
         var i = 1;
-
-        const roundText = document.createElement('h3');
-        document.body.appendChild(roundText);    
-
+        const roundText = document.createElement('h2');
+        document.body.appendChild(roundText);
         const scoreText = document.createElement('h3');
-        document.body.appendChild(scoreText);   
+        document.body.appendChild(scoreText);
+        const display1 = [];
+
+        const rock1 = new Image(100, 100);
+        rock1.style.border = '1px solid black';
+        rock1.style.margin = '10px';
+        rock1.src = './css/rock.jpg';
+
+        const scissors1 = new Image(100, 100);
+        scissors1.style.border = '1px solid black';
+        scissors1.style.margin = '10px';
+        scissors1.src = './css/scissors.jpg';
+
+        const paper1 = new Image(100, 100);
+        paper1.style.border = '1px solid black';
+        paper1.style.margin = '10px';
+        paper1.src = './css/paper.jpg';
+
+        const rock2 = new Image(100, 100);
+        rock2.style.border = '1px solid black';
+        rock2.style.margin = '10px';
+        rock2.src = './css/rock.jpg';
+
+        const scissors2 = new Image(100, 100);
+        scissors2.style.border = '1px solid black';
+        scissors2.style.margin = '10px';
+        scissors2.src = './css/scissors.jpg';
+
+        const paper2 = new Image(100, 100);
+        paper2.style.border = '1px solid black';
+        paper2.style.margin = '10px';
+        paper2.src = './css/paper.jpg';
+
+        const pic1 = new Image(78, 100);
+        pic1.src = './css/pic1.jpg';
+        const pic2 = new Image(78, 100);
+        pic2.src = './css/pic2.jpg';
+
+        display1.push(pic1);
+        display1.push(pic2);
+
+        document.body.appendChild(display1[0]);
+        document.body.appendChild(display1[1]);
 
         buttons.forEach((button) => {
             button.addEventListener('click', () => {
+                document.body.removeChild(display1[0]);
+                document.body.removeChild(display1[1]);
+                display1.pop();
+                display1.pop();
                 switch (button.id) {
                     case '1':
+                        display1.push(paper1);
                         game('paper');
                         break;
                     case '2':
+                        display1.push(rock1);
                         game('rock');
                         break;
                     case '3':
+                        display1.push(scissors1);
                         game('scissors');
                         break;
                     case 'new':
@@ -52,100 +102,79 @@
             var playerScore = 0;
             var compScore = 0;
             location.reload();
-}
+        }
 
         function computerPlay() {
             let a;
             a = Math.floor(Math.random() * 3);
             if (a == 0) {
+                display1.push(rock2);
                 return "rock";
             }
             else if (a == 1) {
+                display1.push(paper2);
                 return "paper";
             }
             else {
+                display1.push(scissors2);
                 return "scissors";
             }
         }
 
         function playRound(playerSelect, compSelect) {
             if (playerSelect == "rock" && compSelect == "scissors") {
-                const sciText = document.createElement('p');
-                sciText.textContent = "Rock vs Scissors";
-                sciText.style.color = 'red';
-                document.body.appendChild(sciText);
                 return "Player wins!";
             }
 
             if (playerSelect == "rock" && compSelect == "paper") {
-                const paperText = document.createElement('p');
-                paperText.textContent = "Rock vs Paper";
-                document.body.appendChild(paperText); 
                 return "Computer wins!";
             }
 
             if (playerSelect == "scissors" && compSelect == "paper") {
-                const paperText = document.createElement('p');
-                paperText.textContent = "Scissors vs Paper";
-                document.body.appendChild(paperText); 
                 return "Player wins!";
             }
 
             if (playerSelect == "scissors" && compSelect == "rock") {
-                const rockText = document.createElement('p');
-                rockText.textContent = "Scissors vs Rock";
-                rockText.style.color = 'blue';
-                document.body.appendChild(rockText); 
                 return "Computer wins!";
             }
 
             if (playerSelect == "paper" && compSelect == "scissors") {
-                const sciText = document.createElement('p');
-                sciText.textContent = "Paper vs Scissors";
-                sciText.style.color = 'red';
-                document.body.appendChild(sciText);
                 return "Computer wins!";
             }
 
             if (playerSelect === compSelect) {
-                const tieText = document.createElement('p');
-                tieText.textContent = "Tie";
-                tieText.style.color = 'green';
-                document.body.appendChild(tieText);
                 return "Tie";
             }
 
             if (playerSelect == "paper" && compSelect == "rock") {
-                const rockText = document.createElement('p');
-                rockText.textContent = "Paper vs Rock";
-                rockText.style.color = 'blue';
-                document.body.appendChild(rockText); 
                 return "Player wins!";
             }
         }
 
         function game(a) {
             var rounds = playRound(a, computerPlay());
+            document.body.appendChild(display1[0]);
+            document.body.appendChild(display1[1]);
             if (rounds == "Player wins!") {
                 playerScore++;
                 if (playerScore == 5) {
-                    const pWinText = document.createElement('h3');
-                    pWinText.textContent = "Computer wins! All hail our A.I. Overlords! Start new game?";
-                    document.body.appendChild(pWinText); 
+                    const pWinText = document.createElement('h1');
+                    pWinText.textContent = "You win! Start new game?";
+                    document.body.appendChild(pWinText);
                 }
             } else if (rounds == "Computer wins!") {
                 compScore++;
                 if (compScore == 5) {
-                    const cWinText = document.createElement('h3');
+                    const cWinText = document.createElement('h1');
                     cWinText.textContent = "Computer wins! All hail our A.I. Overlords! Start new game?";
-                    document.body.appendChild(cWinText); 
+                    document.body.appendChild(cWinText);
                 }
-            } 
+            }
             roundText.textContent = `Round ${i}`;
-            scoreText.textContent=`Player: ${playerScore} Computer: ${compScore}`
+            scoreText.textContent = `Player: ${playerScore} Computer: ${compScore}`
             i++;
         }
-       
+
     </script>
 </body>
 
